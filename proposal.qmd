@@ -1,11 +1,11 @@
 ---
-title: "Proposal title"
-subtitle: "Proposal"
+title: "Morphological Variations in Palmer Penguins"
+subtitle: "Visual analysis of penguin species scaling and island distribution"
 author: 
   - name: "Team Name"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Project description"
+description: "This project utilizes the Palmer penguins dataset that explores physical charecteristics of three penguin species. The analysis will highlight body mass, flipper length, and bill dimensions. Relationships between sex and island geography will be analyzes as well."
 format:
   html:
     code-tools: true
@@ -21,7 +21,17 @@ execute:
 ```{r}
 #| label: load-pkgs
 #| message: false
+if (!require("pacman")) 
+  install.packages("pacman")
+
+# use this line for installing/loading
+pacman::p_load(openintro)
+pacman::p_load(palmerpenguins)
 library(tidyverse)
+library(ggplot2)
+library(palmerpenguins)
+
+
 ```
 
 ## Dataset
@@ -29,16 +39,43 @@ library(tidyverse)
 ```{r}
 #| label: load-dataset
 #| message: false
+glimpse(penguins)
+nrow(penguins)
+
 ```
 
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
 
 Make sure to load the data and use inline code for some of this information.
 
+The dataset used is the Palmer Penguins dataset. The data was collected and made available by Dr. Kristen Gorman and the Palmer Station. The data was also made available by CC-0 license in accordance with LTER data access policy for type I data. There is data on 344 penguins in the dataset and was collected from 3 islands in Antartica. There are 344 rows and 8 columns. I chose this dataset because it of a personal liking of the movie happy feet and the study charles darwin did on beaks. The dataset is also relatively simple with the penguins and penguins_raw datasets with the initial dataset being a simplified version of the latter, allowing me to spend more time story telling with the data.  
+
 ## Questions
 
-The two questions you want to answer.
+How does the relationship between flipper length and body mass differ among the three different species?
+
+How do the physical proportions of a penguin's bill vary between sex and if the distribution is consistent across the three islands?
 
 ## Analysis plan
 
--   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+- A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+
+Q1. How does the relationship between flipper length and body mass differ among the three penguin species? 
+With an already clean dataset, no new variables will need to be created. The variables leveraged from the dataset will be body_mass_g, species, and flipper_length_mm. I plan on developing a scatterplot with the body_mass_g and flipper_length_mm on the x and y axis, respectively. Then I would utilize the species variable with a color to observe trends. 
+
+Q2. How do the physical proportions of a penguins bill vary between males and females and is the distribution consistent across the three islands? 
+
+I will be using the bill_length_mm, bill_depth_mm, sex, and island to answer this question in a scatterplot. Using bill length on the x axis and depth on the y axis, the sex variable will be mapped ot the color aesthetic and facet_grid() will be used to seperate the data by island. 
+
+
+task | status | due | priority
+
+complete proposal for others to review | done       | before jun 11           | high
+review peer proposals                  | incomplete | jun 12                  | high
+add changes from proposals             | pending    | jun 16                  | medium
+begin plots                            | pending    | jun 18                  | low
+begin write-up                         | pending    | jun 20                  | low
+finalize plots and write up            | pending    | jun 27                  | low
+finalize presentation                  | pending    | jun 29                  | low
+turn everything in                     | pending    | jun 30 or jul 3 in d2l? | high 
+
