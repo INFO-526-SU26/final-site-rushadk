@@ -19,4 +19,8 @@ execute:
 
 ## Abstract
 
-Add project abstract here.
+This report presents a multivariable exploratory data analysis of the Palmer Archipelago penguin dataset to investigate how physical characteristics scale across different species, sexes, and geographic environments. Utilizing R and the `ggplot2` framework, this visual analysis addresses two primary observational questions using combinations of numerical and categorical variables.
+
+First, an evaluation of inter-species scaling reveals a strong, positive association between body mass and flipper length across all observed penguins
+
+Second, a geographic and sex-based examination of bill depth distributions across the Biscoe, Dream, and Torgersen islands uncovers consistent evidence of sexual dimorphism,
