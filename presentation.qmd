@@ -21,8 +21,8 @@ execute:
 #| include: false
 
 # Load packages here
-pacman::p_load(tidymodels,
-               tidyverse, palmerpenguins)
+#pacman::p_load(tidymodels,
+ #              tidyverse)
 
 library(tidyverse)
 library(palmerpenguins)
@@ -76,13 +76,156 @@ knitr::opts_chunk$set(
 
 ```{r}
 #| label: load-data
-#| include: false
+#| include: true
 # Load data here
-data(mtcars)
-mtcars$speed <- mtcars$hp / mtcars$wt
 
-data("penguins")
+
+# 1. Prepare data for Q2
+# We specifically drop rows where sex (or our numerical variables) is missing 
+# to ensure a clean visual comparison of sexual dimorphism.
+df_q2 <- penguins %>%
+  drop_na(bill_length_mm, bill_depth_mm, sex, island)
+
+# 2. Build the visualization
+ggplot(df_q2, aes(x = bill_length_mm, y = bill_depth_mm, color = sex)) +
+  # Add scatterplot points with transparency to handle overlapping
+  geom_point(size = 3, alpha = 0.7) +
+  # Facet the plot by island to create side-by-side comparative panels
+  facet_wrap(~ island) +
+  # Use a distinct, colorblind-friendly palette for biological sex
+  scale_color_manual(values = c("female" = "#D95F02", "male" = "#1B9E77")) +
+  # Add professional, descriptive labels
+  labs(
+    title = "Penguin Bill Proportions by Sex and Island",
+    subtitle = "Comparing bill length vs. depth across the Palmer Archipelago",
+    x = "Bill Length (mm)",
+    y = "Bill Depth (mm)",
+    color = "Sex"
+  ) +
+  # Customize specific theme elements (base minimal theme is applied globally)
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    legend.position = "bottom",
+    # Make the facet labels (the island names) bold so they stand out
+    strip.text = element_text(face = "bold", size = 12) 
+  )
+
 ```
+
+
+## Motivation: Why Palmer Penguins? {.smaller}
+
+
+### The Inspiration
+
+- **Pop Culture Spark:** A personal fondness for the film *Happy Feet* initially drew me to studying penguin demographics.
+
+- **Scientific Curiosity:** Inspired by Charles Darwin’s landmark studies on finch beak adaptation, I wanted to explore how evolutionary traits manifest in penguin bill dimensions.
+
+::: columns
+::: {.column width="50%"}
+![](images/happy_feet.jpg){width="55%" fig-align="left"}
+
+::: {.small-text style="font-size: 0.5em; color: gray; margin-top: 5px; text-align: left;"}
+
+:::
+:::
+
+::: {.column width="50%"}
+![](images/galapagos_island_beaks.jpg){width="85%" fig-align="right"}
+
+::: {.small-text style="font-size: 0.5em; color: gray; margin-top: 5px; text-align: right;"}
+
+:::
+:::
+:::
+
+
+
+## The Dataset {.smaller} 
+
+::: columns
+::: {.column width="45%"}
+### Dimensions & Scale
+
+
+- **344** Total Observations 
+  
+
+- **8** Unique Variables 
+
+
+- **3** Target Species
+  *(Adelie, Chinstrap, and Gentoo)*
+
+- **3** Study Islands 
+  *(Biscoe, Dream, and Torgersen)*
+  
+- penguins and penguins_raw datasets included, penguins.csv was utilized
+
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+### Key Variables of Interest
+
+The following attributes are isolated to answer the core research questions:
+
+* **Morphological Metrics (Numerical):** `body_mass_g`, `flipper_length_mm`, `bill_length_mm`, and `bill_depth_mm`
+
+* **Ecological Groupings (Categorical):** `species`, `sex`, and `island`
+:::
+:::
+
+## Question 1: Interspecies Scaling {.smaller}
+
+**The Question:** How does the relationship between a penguin's body mass and flipper length differ across the three distinct species?
+
+::: columns
+::: {.column width="50%"}
+### Analytical Goal
+We seek to determine if the physical scaling of body mass vs. limb length is consistent across the genus, or if specific species exhibit unique growth trajectories.
+:::
+
+::: {.column width="50%"}
+### Variables Used
+*   **Numerical Attributes:**
+    - `body_mass_g` (Independent / X-axis)
+    - `flipper_length_mm` (Dependent / Y-axis)
+
+*   **Categorical Attribute:**
+    - `species` (Grouping / Color & Shape)
+:::
+:::
+
+## Question 2: Geography & Dimorphism {.smaller}
+
+**The Question:** What is the distribution of bill depths across the three islands, and does this change depending on the sex of the penguin?
+
+::: columns
+::: {.column width="50%"}
+### Analytical Goal
+This multivariable approach evaluates "Sexual Dimorphism" (size differences between sexes) and whether these physical traits are influenced by the regional island environment.
+:::
+
+::: {.column width="50%"}
+### Variables Used
+*   **Numerical Attributes:**
+    - `bill_depth_mm` (Primary Metric / Y-axis)
+    - `bill_length_mm` (Contextual Metric / X-axis)
+
+*   **Categorical Attributes:**
+    - `island` (Geographic Grouping / Facets)
+    - `sex` (Biological Grouping / Color)
+:::
+:::
+
+
+## Visualizations
+
+## Conclusions 
 
 # Using Quarto for presentations
 
@@ -115,11 +258,11 @@ or in two columns
 ## Code
 
 ```{r, echo=FALSE}
-model <- lm(mpg ~ speed, data = mtcars) 
+#model <- lm(mpg ~ speed, data = mtcars) 
 
-model |> tidy()
+#model |> tidy()
 
-model |> glance()
+#model |> glance()
 
 ```
 
