@@ -1,11 +1,11 @@
 ---
-title: "Project Title"
-subtitle: "INFO 526 - Summer 2024 - Final Project"
+title: "Morphological Variations in Palmer Penguins"
+subtitle: "INFO 526 - Summer 2026 - Final Project"
 author: 
-  - name: "Team name"
+  - name: "Rushad Khan"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Project description"
+description: "This project utilizes the Palmer penguins dataset that explores physical charecteristics of three penguin species. The analysis will highlight body mass, flipper length, and bill dimensions. Relationships between sex and island geography will be analyzes as well."
 format:
    html:
     code-tools: true
@@ -19,8 +19,4 @@ execute:
 
 ## Abstract
 
-This report presents a multivariable exploratory data analysis of the Palmer Archipelago penguin dataset to investigate how physical characteristics scale across different species, sexes, and geographic environments. Utilizing R and the `ggplot2` framework, this visual analysis addresses two primary observational questions using combinations of numerical and categorical variables.
-
-First, an evaluation of inter-species scaling reveals a strong, positive association between body mass and flipper length across all observed penguins
-
-Second, a geographic and sex-based examination of bill depth distributions across the Biscoe, Dream, and Torgersen islands uncovers consistent evidence of sexual dimorphism,
+This project explores patterns in the Palmer Penguins dataset through data visualization techniques in R and the `ggplot2` framework to better understand variation in penguin morphology across species, sex, and island. Two research questions are investigated: (1) how the relationship between flipper length and body mass differs among the three penguin species, and (2) how bill dimensions vary by sex and whether these patterns are consistent across the three islands. Scatterplots, faceted visualizations, and comparative plots are used to reveal trends, correlations, and group differences. The analysis demonstrates that species exhibit distinct relationships between flipper length and body mass, reflecting differences in body size and morphology. Additionally, bill length and bill depth show noticeable variation between males and females, with the magnitude and distribution of these differences differing across islands. Overall, the project highlights how visualization can effectively uncover biological patterns and support exploratory data analysis in ecological datasets.
