@@ -2,7 +2,7 @@
 title: "Morphological Variations in Palmer Penguins"
 subtitle: "Visual analysis of penguin species scaling and island distribution"
 author: 
-  - name: "Team Name"
+  - name: "Rushad Khan"
     affiliations:
       - name: "School of Information, University of Arizona"
 description: "This project utilizes the Palmer penguins dataset that explores physical charecteristics of three penguin species. The analysis will highlight body mass, flipper length, and bill dimensions. Relationships between sex and island geography will be analyzes as well."
