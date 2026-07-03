@@ -31,6 +31,8 @@ This project conducts an exploratory visual analysis of the dataset to uncover p
 
 ### Question 1
 
+#### Introduction
+
 The first objective of this analysis is to evaluate inter-species scaling by asking: **How does the relationship between flipper length and body mass differ among the three penguin species?** Due to animals of different species possess unique biological baseline sizes, it is important to observe whether the fundamental relationship between mass and limb length remains consistent across the genus.
 
 #### Approach
@@ -72,6 +74,8 @@ ggplot(df_q1, aes(x = body_mass_g, y = flipper_length_mm, color = species, shape
 The visualization displays a strong, positive correlation between body mass and flipper length across the entire dataset. The color mapping does highlight some distinct morphological clustering though. The Gentoo penguins exhibit a significantly larger physical profile in comparison to the Adelie and Chinstrap species. Despite the differing sizes, all the dashed linear trend lines demonstrate the same theme of as mass increases. flipper length proportionally increases as well across all three species.
 
 ### Question 2
+
+#### Introduction
 
 The second objective transitions into demographic and geographic mapping by asking: **How do the physical proportions of a penguin's bill (length vs. depth) vary between males and females, and is this distribution consistent across the three islands?** This evaluates both sexual dimorphism and how regional populations differ across the archipelago.
 
