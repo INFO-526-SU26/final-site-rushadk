@@ -20,3 +20,95 @@ execute:
 ## Abstract
 
 This project explores patterns in the Palmer Penguins dataset through data visualization techniques in R and the `ggplot2` framework to better understand variation in penguin morphology across species, sex, and island. Two research questions are investigated: (1) how the relationship between flipper length and body mass differs among the three penguin species, and (2) how bill dimensions vary by sex and whether these patterns are consistent across the three islands. Scatterplots, faceted visualizations, and comparative plots are used to reveal trends, correlations, and group differences. The analysis demonstrates that species exhibit distinct relationships between flipper length and body mass, reflecting differences in body size and morphology. Additionally, bill length and bill depth show noticeable variation between males and females, with the magnitude and distribution of these differences differing across islands. Overall, the project highlights how visualization can effectively uncover biological patterns and support exploratory data analysis in ecological datasets.
+
+## Write up
+
+### Introduction - Dataset Overview
+
+This analysis utilizes the **Palmer Penguins** dataset, originally collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER. The dataset consists of 344 observations and 8 variables, serving as a modern, robust foundation for data exploration. It tracks three distinct species of brush-tailed penguins (Adelie, Chinstrap, and Gentoo) across three islands in the Palmer Archipelago (Biscoe, Dream, and Torgersen).
+
+This project conducts an exploratory visual analysis of the dataset to uncover physical scaling patterns and geographical distributions without asserting unverified causal claims. By combining numerical metrics (such as body mass, flipper length, and bill dimensions) with categorical demographics (species, sex, and island), this report answers two distinct multivariable questions regarding the ecological structure of these Antarctic communities.
+
+### Question 1
+
+The first objective of this analysis is to evaluate inter-species scaling by asking: **How does the relationship between flipper length and body mass differ among the three penguin species?** Due to animals of different species possess unique biological baseline sizes, it is important to observe whether the fundamental relationship between mass and limb length remains consistent across the genus.
+
+#### Approach
+
+Utilizing 3 key variables defined the approach for this visualization. body_mass_g, flipper_length_mm and species which respectively are numerical and species being categorical. Preparing the data involved dropping any rows containing NA for the previously mentioned variables to ensure a complete visualization could be made. Using the body mass as the x-axis and flipper length as they y-axis was the best approach forward. The species variable gets mapped to both color and shape aesthetics to ensure the clusters are visually distinct. Using a trendline was also another feature to add with geom_smooth to visualize the trajectory of the scaling relationship.
+
+#### Analysis
+
+``` r
+library(tidyverse)
+library(palmerpenguins)
+
+#load data
+df_q1 <- penguins |>
+  drop_na(body_mass_g, flipper_length_mm, species)
+
+#visualization
+ggplot(df_q1, aes(x = body_mass_g, y = flipper_length_mm, color = species, shape = species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, linetype = "dashed") +
+  scale_color_manual(values = c("Adelie" = "darkorange", "Chinstrap" = "purple", "Gentoo" = "cyan4")) +
+  labs(
+    title = "Morphological Scaling by Penguin Species",
+    subtitle = "Comparing body mass to flipper length across Adelie, Chinstrap, and Gentoo penguins",
+    x = "Body Mass (grams)",
+    y = "Flipper Length (mm)",
+    color = "Species",
+    shape = "Species"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold")
+  )
+```
+
+#### Discussion
+
+The visualization displays a strong, positive correlation between body mass and flipper length across the entire dataset. The color mapping does highlight some distinct morphological clustering though. The Gentoo penguins exhibit a significantly larger physical profile in comparison to the Adelie and Chinstrap species. Despite the differing sizes, all the dashed linear trend lines demonstrate the same theme of as mass increases. flipper length proportionally increases as well across all three species.
+
+### Question 2
+
+The second objective transitions into demographic and geographic mapping by asking: **How do the physical proportions of a penguin's bill (length vs. depth) vary between males and females, and is this distribution consistent across the three islands?** This evaluates both sexual dimorphism and how regional populations differ across the archipelago.
+
+#### Approach
+
+This visualization requires the use of four key variables, bill_length_mm, bill_depth_mm, sex, and island. The first two variables being numerical with the latter two being categorical. Filtering out any incomplete entries for the sex variable was required for the data preparation. The x-axis was chosen to be the bill length with the bill dpeth being the y-axis. Sex gets mapped to the color aesthetic and facet_wrap() was utilized to isolate the results from each island. Panel.border and spacing lines were added to reduce any ambiguity and to ensure the results were easy to tell from each island.
+
+#### Analysis
+
+``` r
+df_q2 <- penguins |>
+  drop_na(bill_length_mm, bill_depth_mm, sex, island)
+
+#visualization
+ggplot(df_q2, aes(x = bill_length_mm, y = bill_depth_mm, color = sex)) +
+  geom_point(size = 3, alpha = 0.7) +
+  facet_wrap(~ island) +
+  scale_color_manual(values = c("female" = "#D95F02", "male" = "#1B9E77")) +
+  labs(
+    title = "Penguin Bill Proportions by Sex and Island",
+    subtitle = "Comparing bill length vs. depth across the Palmer Archipelago",
+    x = "Bill Length (mm)",
+    y = "Bill Depth (mm)",
+    color = "Sex"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold", size = 12),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
+    panel.spacing = unit(1, "lines")
+    
+  )
+
+```
+
+#### Discussion
+
+The faceted scatterplot provides consistent evidence of sexual dimorphism across the Palmer Archipelago. In almost every panel, male observations reliably cluster higher on the y-axis, indicating greater bill depth, than female observations. Furthermore, the geographic faceting reveals stark differences in island populations. While Dream and Torgersen islands feature penguins with relatively short but deep bills which are characteristic of the Adelie and Chinstrap populations, Biscoe Island exhibits a massive, distinct cluster of penguins with long but shallow bills. This visually confirms the localized distribution of Gentoo penguins exclusively on Biscoe Island, proving that their physical traits are closely tied to where they live.

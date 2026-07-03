@@ -35,7 +35,7 @@ library(palmerpenguins)
 
 - A nostalgic reference for the film *Happy Feet* initially drew me to studying penguin demographics.
 
-- Inspired by Charles Darwin’s landmark studies on finch beak adaptation, I wanted to explore how evolutionary traits manifest in penguin bill dimensions.
+- Inspired by Charles Darwin’s widespread studies on finch beak adaptation, I wanted to explore how evolutionary traits manifest in penguin bill dimensions.
 
 ::: columns
 ::: {.column width="50%"}
@@ -147,7 +147,7 @@ This multivariable approach evaluates "Sexual Dimorphism" (size differences betw
 df_q1 <- penguins |>
   drop_na(body_mass_g, flipper_length_mm, species)
 
-#build the visualization
+#visualization
 ggplot(df_q1, aes(x = body_mass_g, y = flipper_length_mm, color = species, shape = species)) +
   geom_point(size = 3, alpha = 0.8) +
   geom_smooth(method = "lm", se = FALSE, linetype = "dashed") +
@@ -181,7 +181,7 @@ ggplot(df_q1, aes(x = body_mass_g, y = flipper_length_mm, color = species, shape
 df_q2 <- penguins |>
   drop_na(bill_length_mm, bill_depth_mm, sex, island)
 
-#build the visualization
+#visualization
 ggplot(df_q2, aes(x = bill_length_mm, y = bill_depth_mm, color = sex)) +
   geom_point(size = 3, alpha = 0.7) +
   facet_wrap(~ island) +
@@ -214,23 +214,23 @@ ggplot(df_q2, aes(x = bill_length_mm, y = bill_depth_mm, color = sex)) +
 
 - **Universal Correlation:** All three species show a strong, positive relationship between body mass and flipper length.
 
-- **Consistent Trajectories:** While Gentoo penguins are physically larger, their growth trajectory (slope) is nearly identical to Adelie and Chinstrap populations, suggesting a conserved biological scaling across all observed penguins.
+- **Consistent Trajectories:** While Gentoo penguins are physically larger, their slope is closely identical to the Adelie and Chinstrap populations. This suggests a conserved biological scaling across all observed penguins.
 :::
 
 ::: {.column width="33%"}
 #### 2. Geography & Sex Answer
 
-- **Sexual Dimorphism:** We found definitive evidence that male penguins exhibit greater bill depth than females across all study sites.
+- **Sexual Dimorphism:** It can be seen that male penguins exhibit greater bill depth than females across all study sites.
 
-- **Regional Isolation:** Our faceted analysis visually proved that Gentoo penguins are localized entirely on Biscoe Island, making that island morphologically unique within the archipelago.
+- **Regional Isolation:** The visual analysis proves that Gentoo penguins live only only Biscoe Island, making its data physically distinct.
 :::
 
 ::: {.column width="33%"}
 #### 3. Overall
 
-- **Evolution in Action:** Much like Darwin’s finches, these penguin populations show physical adaptations (bill dimensions) that reflect localized ecological niches.
+- **Evolution in Action:** Similar to Darwin’s finches, these penguin populations show physical adaptations, bill dimensions, that reflect localized ecological niches.
 
-- **Narrative Over Noise:** By prioritizing data storytelling with a clean dataset, we translated 344 rows of raw metrics into a clear, visual narrative about Antarctic biodiversity.
+- **Narrative Over Noise:** By prioritizing data storytelling with a clean dataset, 344 rows of raw metrics were translated into a clear, visual narrative about Antarctic biodiversity.
 :::
 
 :::
