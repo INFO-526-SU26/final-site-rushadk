@@ -25,90 +25,83 @@
     "href": "proposal.html#analysis-plan",
     "title": "Morphological Variations in Palmer Penguins",
     "section": "Analysis plan",
-    "text": "Analysis plan\n\nA plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).\n\nQ1. How does the relationship between flipper length and body mass differ among the three penguin species? With an already clean dataset, no new variables will need to be created. The variables leveraged from the dataset will be body_mass_g, species, and flipper_length_mm. I plan on developing a scatterplot with the body_mass_g and flipper_length_mm on the x and y axis, respectively. Then I would utilize the species variable with a color to observe trends.\nQ2. How do the physical proportions of a penguins bill vary between males and females and is the distribution consistent across the three islands?\nI will be using the bill_length_mm, bill_depth_mm, sex, and island to answer this question in a scatterplot. Using bill length on the x axis and depth on the y axis, the sex variable will be mapped ot the color aesthetic and facet_grid() will be used to seperate the data by island.\ntask | status | due | priority\ncomplete proposal for others to review | done | before jun 11 | high review peer proposals | incomplete | jun 12 | high add changes from proposals | pending | jun 16 | medium begin plots | pending | jun 18 | low begin write-up | pending | jun 20 | low finalize plots and write up | pending | jun 27 | low finalize presentation | pending | jun 29 | low turn everything in | pending | jun 30 or jul 3 in d2l? | high"
+    "text": "Analysis plan\n\nA plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).\n\nQ1. How does the relationship between flipper length and body mass differ among the three penguin species?\nWith an already clean dataset, no new variables will need to be created. The variables leveraged from the dataset will be body_mass_g, species, and flipper_length_mm. I plan on developing a scatterplot with the body_mass_g and flipper_length_mm on the x and y axis, respectively. Then I would utilize the species variable with a color to observe trends.\nQ2. How do the physical proportions of a penguins bill vary between males and females and is the distribution consistent across the three islands?\nI will be using the bill_length_mm, bill_depth_mm, sex, and island to answer this question in a scatterplot. Using bill length on the x axis and depth on the y axis, the sex variable will be mapped ot the color aesthetic and facet_grid() will be used to seperate the data by island.\nAfter receiving feedback, a boxplot option will be explored for q2. The other feedback on how utilizing face_grid() or facet_wrap() will be for the island variable. The functions will create 3 panels for the 3 islands and to observe trends of size gaps between male and females regarding the islands. Also to observe trends regarding bill proportions from each island, seeing if geographic location effects their bills.\ntask | status | due | priority\ncomplete proposal for others to review | done | before jun 11 | high review peer proposals | incomplete | jun 12 | high add changes from proposals | pending | jun 16 | medium begin plots | pending | jun 18 | low begin write-up | pending | jun 20 | low finalize plots and write up | pending | jun 27 | low finalize presentation | pending | jun 29 | low turn everything in | pending | jun 30 or jul 3 in d2l? | high"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Project Title",
+    "title": "Morphological Variations in Palmer Penguins",
     "section": "",
-    "text": "Add project abstract here."
+    "text": "This project explores patterns in the Palmer Penguins dataset through data visualization techniques in R and the ggplot2 framework to better understand variation in penguin morphology across species, sex, and island. Two research questions are investigated: (1) how the relationship between flipper length and body mass differs among the three penguin species, and (2) how bill dimensions vary by sex and whether these patterns are consistent across the three islands. Scatterplots, faceted visualizations, and comparative plots are used to reveal trends, correlations, and group differences. The analysis demonstrates that species exhibit distinct relationships between flipper length and body mass, reflecting differences in body size and morphology. Additionally, bill length and bill depth show noticeable variation between males and females, with the magnitude and distribution of these differences differing across islands. Overall, the project highlights how visualization can effectively uncover biological patterns and support exploratory data analysis in ecological datasets."
   },
   {
     "objectID": "index.html#abstract",
     "href": "index.html#abstract",
-    "title": "Project Title",
+    "title": "Morphological Variations in Palmer Penguins",
     "section": "",
-    "text": "Add project abstract here."
+    "text": "This project explores patterns in the Palmer Penguins dataset through data visualization techniques in R and the ggplot2 framework to better understand variation in penguin morphology across species, sex, and island. Two research questions are investigated: (1) how the relationship between flipper length and body mass differs among the three penguin species, and (2) how bill dimensions vary by sex and whether these patterns are consistent across the three islands. Scatterplots, faceted visualizations, and comparative plots are used to reveal trends, correlations, and group differences. The analysis demonstrates that species exhibit distinct relationships between flipper length and body mass, reflecting differences in body size and morphology. Additionally, bill length and bill depth show noticeable variation between males and females, with the magnitude and distribution of these differences differing across islands. Overall, the project highlights how visualization can effectively uncover biological patterns and support exploratory data analysis in ecological datasets."
+  },
+  {
+    "objectID": "index.html#write-up",
+    "href": "index.html#write-up",
+    "title": "Morphological Variations in Palmer Penguins",
+    "section": "Write up",
+    "text": "Write up\n\nIntroduction - Dataset Overview\nThis analysis utilizes the Palmer Penguins dataset, originally collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER. The dataset consists of 344 observations and 8 variables, serving as a modern, robust foundation for data exploration. It tracks three distinct species of brush-tailed penguins (Adelie, Chinstrap, and Gentoo) across three islands in the Palmer Archipelago (Biscoe, Dream, and Torgersen).\nThis project conducts an exploratory visual analysis of the dataset to uncover physical scaling patterns and geographical distributions without asserting unverified causal claims. By combining numerical metrics (such as body mass, flipper length, and bill dimensions) with categorical demographics (species, sex, and island), this report answers two distinct multivariable questions regarding the ecological structure of these Antarctic communities.\n\n\nQuestion 1\n\nIntroduction\nThe first objective of this analysis is to evaluate inter-species scaling by asking: How does the relationship between flipper length and body mass differ among the three penguin species? Due to animals of different species possess unique biological baseline sizes, it is important to observe whether the fundamental relationship between mass and limb length remains consistent across the genus.\n\n\nApproach\nUtilizing 3 key variables defined the approach for this visualization. body_mass_g, flipper_length_mm and species which respectively are numerical and species being categorical. Preparing the data involved dropping any rows containing NA for the previously mentioned variables to ensure a complete visualization could be made. Using the body mass as the x-axis and flipper length as they y-axis was the best approach forward. The species variable gets mapped to both color and shape aesthetics to ensure the clusters are visually distinct. Using a trendline was also another feature to add with geom_smooth to visualize the trajectory of the scaling relationship.\n\n\nAnalysis\nlibrary(tidyverse)\nlibrary(palmerpenguins)\n\n#load data\ndf_q1 &lt;- penguins |&gt;\n  drop_na(body_mass_g, flipper_length_mm, species)\n\n#visualization\nggplot(df_q1, aes(x = body_mass_g, y = flipper_length_mm, color = species, shape = species)) +\n  geom_point(size = 3, alpha = 0.8) +\n  geom_smooth(method = \"lm\", se = FALSE, linetype = \"dashed\") +\n  scale_color_manual(values = c(\"Adelie\" = \"darkorange\", \"Chinstrap\" = \"purple\", \"Gentoo\" = \"cyan4\")) +\n  labs(\n    title = \"Morphological Scaling by Penguin Species\",\n    subtitle = \"Comparing body mass to flipper length across Adelie, Chinstrap, and Gentoo penguins\",\n    x = \"Body Mass (grams)\",\n    y = \"Flipper Length (mm)\",\n    color = \"Species\",\n    shape = \"Species\"\n  ) +\n  theme(\n    plot.title = element_text(face = \"bold\", size = 16),\n    legend.position = \"bottom\",\n    legend.title = element_text(face = \"bold\")\n  )\n\n\nDiscussion\nThe visualization displays a strong, positive correlation between body mass and flipper length across the entire dataset. The color mapping does highlight some distinct morphological clustering though. The Gentoo penguins exhibit a significantly larger physical profile in comparison to the Adelie and Chinstrap species. Despite the differing sizes, all the dashed linear trend lines demonstrate the same theme of as mass increases. flipper length proportionally increases as well across all three species.\n\n\n\nQuestion 2\n\nIntroduction\nThe second objective transitions into demographic and geographic mapping by asking: How do the physical proportions of a penguin’s bill (length vs. depth) vary between males and females, and is this distribution consistent across the three islands? This evaluates both sexual dimorphism and how regional populations differ across the archipelago.\n\n\nApproach\nThis visualization requires the use of four key variables, bill_length_mm, bill_depth_mm, sex, and island. The first two variables being numerical with the latter two being categorical. Filtering out any incomplete entries for the sex variable was required for the data preparation. The x-axis was chosen to be the bill length with the bill dpeth being the y-axis. Sex gets mapped to the color aesthetic and facet_wrap() was utilized to isolate the results from each island. Panel.border and spacing lines were added to reduce any ambiguity and to ensure the results were easy to tell from each island.\n\n\nAnalysis\ndf_q2 &lt;- penguins |&gt;\n  drop_na(bill_length_mm, bill_depth_mm, sex, island)\n\n#visualization\nggplot(df_q2, aes(x = bill_length_mm, y = bill_depth_mm, color = sex)) +\n  geom_point(size = 3, alpha = 0.7) +\n  facet_wrap(~ island) +\n  scale_color_manual(values = c(\"female\" = \"#D95F02\", \"male\" = \"#1B9E77\")) +\n  labs(\n    title = \"Penguin Bill Proportions by Sex and Island\",\n    subtitle = \"Comparing bill length vs. depth across the Palmer Archipelago\",\n    x = \"Bill Length (mm)\",\n    y = \"Bill Depth (mm)\",\n    color = \"Sex\"\n  ) +\n  theme(\n    plot.title = element_text(face = \"bold\", size = 16),\n    legend.position = \"bottom\",\n    legend.title = element_text(face = \"bold\"),\n    strip.text = element_text(face = \"bold\", size = 12),\n    panel.border = element_rect(color = \"black\", fill = NA, linewidth = 0.5),\n    panel.spacing = unit(1, \"lines\")\n    \n  )\n\n\nDiscussion\nThe faceted scatterplot provides consistent evidence of sexual dimorphism across the Palmer Archipelago. In almost every panel, male observations reliably cluster higher on the y-axis, indicating greater bill depth, than female observations. Furthermore, the geographic faceting reveals stark differences in island populations. While Dream and Torgersen islands feature penguins with relatively short but deep bills which are characteristic of the Adelie and Chinstrap populations, Biscoe Island exhibits a massive, distinct cluster of penguins with long but shallow bills. This visually confirms the localized distribution of Gentoo penguins exclusively on Biscoe Island, proving that their physical traits are closely tied to where they live."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This project was developed by [Team Name] For INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nTeam member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\nTeam member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\nTeam member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\nTeam member 4: One sentence description of Team member 4 (e.g., year, major, etc.)."
+    "text": "This project was developed by Rushad Khan For INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The project was done individually, Rushad is a graduate student majoring in Electrical and Computer Engineering in his final, 3rd, year."
   },
   {
-    "objectID": "presentation.html#quarto",
-    "href": "presentation.html#quarto",
-    "title": "Project title",
-    "section": "Quarto",
-    "text": "Quarto\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
+    "objectID": "presentation.html#motivation-why-palmer-penguins",
+    "href": "presentation.html#motivation-why-palmer-penguins",
+    "title": "Morphological Variations in Palmer Penguins",
+    "section": "Motivation: Why Palmer Penguins?",
+    "text": "Motivation: Why Palmer Penguins?\n\nA nostalgic reference for the film Happy Feet initially drew me to studying penguin demographics.\nInspired by Charles Darwin’s widespread studies on finch beak adaptation, I wanted to explore how evolutionary traits manifest in penguin bill dimensions."
   },
   {
-    "objectID": "presentation.html#layouts",
-    "href": "presentation.html#layouts",
-    "title": "Project title",
-    "section": "Layouts",
-    "text": "Layouts\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\nlike\nthis\n\nAnd add footnotes"
+    "objectID": "presentation.html#the-dataset-palmer-penguins",
+    "href": "presentation.html#the-dataset-palmer-penguins",
+    "title": "Morphological Variations in Palmer Penguins",
+    "section": "The Dataset: Palmer Penguins",
+    "text": "The Dataset: Palmer Penguins\n\n\nDimensions & Scale\n\n344 Observations | 8 Variables\n3 Species | 3 Islands\n\n\n\n\nVariable Types\n\nNumerical: Mass, Flipper, Bill Dimensions\nCategorical: Species, Island, Sex\n\n\n\nData Preview\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\nChinstrap\nDream\n55.8\n19.8\n207\n4000\nmale\n\n\nChinstrap\nDream\n43.5\n18.1\n202\n3400\nfemale\n\n\nChinstrap\nDream\n49.6\n18.2\n193\n3775\nmale\n\n\nChinstrap\nDream\n50.8\n19.0\n210\n4100\nmale\n\n\nChinstrap\nDream\n50.2\n18.7\n198\n3775\nfemale"
   },
   {
-    "objectID": "presentation.html#code",
-    "href": "presentation.html#code",
-    "title": "Project title",
-    "section": "Code",
-    "text": "Code\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
+    "objectID": "presentation.html#question-1-interspecies-scaling",
+    "href": "presentation.html#question-1-interspecies-scaling",
+    "title": "Morphological Variations in Palmer Penguins",
+    "section": "Question 1: Interspecies Scaling",
+    "text": "Question 1: Interspecies Scaling\nThe Question: How does the relationship between a penguin’s body mass and flipper length differ across the three distinct species?\n\n\nGoal\nSeeking to determine if the physical scaling of body mass in comparison to limb length is consistent across the oberserved findings, or if specific species exhibit unique growth trajectories.\n\nVariables Used\n\nNumerical Attributes:\n\nbody_mass_g (Independent / X-axis)\nflipper_length_mm (Dependent / Y-axis)\n\nCategorical Attribute:\n\nspecies (Grouping / Color & Shape)"
   },
   {
-    "objectID": "presentation.html#plots",
-    "href": "presentation.html#plots",
-    "title": "Project title",
-    "section": "Plots",
-    "text": "Plots"
+    "objectID": "presentation.html#question-2-geography-dimorphism",
+    "href": "presentation.html#question-2-geography-dimorphism",
+    "title": "Morphological Variations in Palmer Penguins",
+    "section": "Question 2: Geography & Dimorphism",
+    "text": "Question 2: Geography & Dimorphism\nThe Question: What is the distribution of bill depths across the three islands, and does this change depending on the sex of the penguin?\n\n\nGoal\nThis multivariable approach evaluates “Sexual Dimorphism” (size differences between sexes) and whether these physical traits are influenced by the regional island environment.\n\nVariables Used\n\nNumerical Attributes:\n\nbill_depth_mm (Primary Metric / Y-axis)\nbill_length_mm (Contextual Metric / X-axis)\n\nCategorical Attributes:\n\nisland (Geographic Grouping / Facets)\nsex (Biological Grouping / Color)"
   },
   {
-    "objectID": "presentation.html#plot-and-text",
-    "href": "presentation.html#plot-and-text",
-    "title": "Project title",
-    "section": "Plot and text",
-    "text": "Plot and text\n\n\n\nSome text\ngoes here"
+    "objectID": "presentation.html#interspecies-scaling-visualization",
+    "href": "presentation.html#interspecies-scaling-visualization",
+    "title": "Morphological Variations in Palmer Penguins",
+    "section": "Interspecies Scaling Visualization",
+    "text": "Interspecies Scaling Visualization"
   },
   {
-    "objectID": "presentation.html#tables",
-    "href": "presentation.html#tables",
-    "title": "Project title",
-    "section": "Tables",
-    "text": "Tables\nIf you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n\n\nAdelie\nTorgersen\nNA\nNA\nNA\nNA\nNA\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale"
+    "objectID": "presentation.html#geography-dimorphism-visualization",
+    "href": "presentation.html#geography-dimorphism-visualization",
+    "title": "Morphological Variations in Palmer Penguins",
+    "section": "Geography & Dimorphism Visualization",
+    "text": "Geography & Dimorphism Visualization"
   },
   {
-    "objectID": "presentation.html#images",
-    "href": "presentation.html#images",
-    "title": "Project title",
-    "section": "Images",
-    "text": "Images\n\nImage credit: Danielle Navarro, Percolate."
-  },
-  {
-    "objectID": "presentation.html#math-expressions",
-    "href": "presentation.html#math-expressions",
-    "title": "Project title",
-    "section": "Math Expressions",
-    "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\n\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\n\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
-  },
-  {
-    "objectID": "presentation.html#feeling-adventurous",
-    "href": "presentation.html#feeling-adventurous",
-    "title": "Project title",
-    "section": "Feeling adventurous?",
-    "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+    "objectID": "presentation.html#conclusion",
+    "href": "presentation.html#conclusion",
+    "title": "Morphological Variations in Palmer Penguins",
+    "section": "Conclusion",
+    "text": "Conclusion\n\n\n1. Interspecies Scaling Answer\n\nUniversal Correlation: All three species show a strong, positive relationship between body mass and flipper length.\nConsistent Trajectories: While Gentoo penguins are physically larger, their slope is closely identical to the Adelie and Chinstrap populations. This suggests a conserved biological scaling across all observed penguins.\n\n\n2. Geography & Sex Answer\n\nSexual Dimorphism: It can be seen that male penguins exhibit greater bill depth than females across all study sites.\nRegional Isolation: The visual analysis proves that Gentoo penguins live only only Biscoe Island, making its data physically distinct.\n\n\n3. Overall\n\nEvolution in Action: Similar to Darwin’s finches, these penguin populations show physical adaptations, bill dimensions, that reflect localized ecological niches.\nNarrative Over Noise: By prioritizing data storytelling with a clean dataset, 344 rows of raw metrics were translated into a clear, visual narrative about Antarctic biodiversity."
   }
 ]
